@@ -1,24 +1,37 @@
 /**
  * HelloApp.java - A simple Java application that extends the functionality of
- * HelloApp UC2. It accepts a user's name as a command-line argument and displays
- * a personalized greeting. If no argument is provided, it safely defaults to "World".
+ * HelloApp UC4. It accepts zero or more command-line arguments and prints a greeting.
+ * It uses an enhanced for loop (for-each loop) to process multiple names.
  *
- * UC 3: Display "Hello" with Command-Line Argument or Default Message
+ * UC 5: Display "Hello" with Multiple Command-Line Arguments using Enhanced For Loop or Default Message
  *
  * @author AK
- * @version 3.0
- * @since UC2
+ * @version 5.0
+ * @since UC4
  */
 public class HelloApp {
-    
+
     public static void main(String[] args) {
-        
-        // Ternary Operator & Array Length Checking:
-        // condition ? valueIfTrue : valueIfFalse
-        // We check args.length to prevent ArrayIndexOutOfBoundsException
-        String name = (args.length > 0) ? args[0] : "World"; 
-        
-        // String Concatenation: Output greeting
-        System.out.println("Hello, " + name + "!");
+
+        // Array Length Check: Detect missing arguments
+        if (args.length == 0) {
+            // Default Handling: Graceful fallback when no arguments are provided
+            System.out.println("Hello, World!");
+        } else {
+            // StringBuilder: Efficient concatenation
+            StringBuilder namesList = new StringBuilder();
+
+            // Enhanced For Loop: Iterate through all arguments
+            for (String name : args) {
+                // Conditional Delimiter Logic: Avoid leading comma
+                if (namesList.length() > 0) {
+                    namesList.append(", ");
+                }
+                namesList.append(name);
+            }
+
+            // String Concatenation: Build the final greeting message
+            System.out.println("Hello, " + namesList.toString() + "!");
+        }
     }
 }
